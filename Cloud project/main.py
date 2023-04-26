@@ -60,10 +60,10 @@ def trainmodel():
     # From description we can see that Date_of_Journey is a object data type,\
     # Therefore, we have to convert this datatype into timestamp so as to use this column properly for prediction
     #
-    # For this we require pandas **to_datetime** to convert object data type to datetime dtype.
+    # For this we require pandas *to_datetime* to convert object data type to datetime dtype.
     #
-    # <span style="color: red;">**.dt.day method will extract only day of that date**</span>\
-    # <span style="color: red;">**.dt.month method will extract only month of that date**</span>
+    # <span style="color: red;">*.dt.day method will extract only day of that date*</span>\
+    # <span style="color: red;">*.dt.month method will extract only month of that date*</span>
 
     # In[9]:
 
@@ -160,8 +160,8 @@ def trainmodel():
     # ## Handling Categorical Data
     #
     # One can find many ways to handle categorical data. Some of them categorical data are,
-    # 1. <span style="color: blue;">**Nominal data**</span> --> data are not in any order --> <span style="color: green;">**OneHotEncoder**</span> is used in this case
-    # 2. <span style="color: blue;">**Ordinal data**</span> --> data are in order --> <span style="color: green;">**LabelEncoder**</span> is used in this case
+    # 1. <span style="color: blue;">*Nominal data</span> --> data are not in any order --> <span style="color: green;">**OneHotEncoder*</span> is used in this case
+    # 2. <span style="color: blue;">*Ordinal data</span> --> data are in order --> <span style="color: green;">**LabelEncoder*</span> is used in this case
 
     # In[21]:
 
@@ -387,9 +387,9 @@ def trainmodel():
     # Following are some of the feature selection methods,
     #
     #
-    # 1. <span style="color: purple;">**heatmap**</span>
+    # 1. <span style="color: purple;">*heatmap*</span>
     # 2. <span style="color: purple;">**feature_importance_**</span>
-    # 3. <span style="color: purple;">**SelectKBest**</span>
+    # 3. <span style="color: purple;">*SelectKBest*</span>
 
     # In[43]:
 
@@ -458,7 +458,7 @@ def trainmodel():
     # 3. Import model
     # 4. Fit the data
     # 5. Predict w.r.t X_test
-    # 6. In regression check **RSME** Score
+    # 6. In regression check *RSME* Score
     # 7. Plot graph
 
     # In[51]:
@@ -469,7 +469,7 @@ def trainmodel():
     # In[52]:
 
     from sklearn.ensemble import RandomForestRegressor
-    reg_rf = RandomForestRegressor()
+    reg_rf = RandomForestRegressor(n_estimators=100,min_samples_split=15,min_samples_leaf=1,max_depth=20)
     reg_rf.fit(X_train, y_train)
 
     # In[53]:
@@ -524,8 +524,8 @@ def trainmodel():
     #
     #
     # * Choose following method for hyperparameter tuning
-    #     1. **RandomizedSearchCV** --> Fast
-    #     2. **GridSearchCV**
+    #     1. *RandomizedSearchCV* --> Fast
+    #     2. *GridSearchCV*
     # * Assign hyperparameters in form of dictionery
     # * Fit the model
     # * Check best paramters and best score
@@ -539,13 +539,13 @@ def trainmodel():
     # Randomized Search CV
 
     # Number of trees in random forest
-   # n_estimators = [int(x) for x in np.linspace(start=100, stop=1200, num=12)]
+    #n_estimators = [int(x) for x in np.linspace(start=100, stop=1200, num=12)]
     # Number of features to consider at every split
     #max_features = ['auto', 'sqrt']
     # Maximum number of levels in tree
-   # max_depth = [int(x) for x in np.linspace(5, 30, num=6)]
+    #max_depth = [int(x) for x in np.linspace(5, 30, num=6)]
     # Minimum number of samples required to split a node
-   # min_samples_split = [2, 5, 10, 15, 100]
+    #min_samples_split = [2, 5, 10, 15, 100]
     # Minimum number of samples required at each leaf node
     #min_samples_leaf = [1, 2, 5, 10]
 
@@ -553,18 +553,18 @@ def trainmodel():
 
     # Create the random grid
 
-   # random_grid = {'n_estimators': n_estimators,
-   #                'max_features': max_features,
-    #     'max_depth': max_depth,
-    #               'min_samples_split': min_samples_split,
-    #               'min_samples_leaf': min_samples_leaf}
+    #random_grid = {'n_estimators': n_estimators,
+                   #'max_features': max_features,
+                   #'max_depth': max_depth,
+                   #'min_samples_split': min_samples_split,
+                   #'min_samples_leaf': min_samples_leaf}
 
     # In[65]:
 
     # Random search of parameters, using 5 fold cross validation,
     # search across 100 different combinations
-   # rf_random = RandomizedSearchCV(estimator=700, param_distributions=random_grid, scoring='neg_mean_squared_error',
-    #                               n_iter=10, cv=5, verbose=2, random_state=42, n_jobs=1)
+    #rf_random = RandomizedSearchCV(estimator=reg_rf, param_distributions=random_grid, scoring='neg_mean_squared_error',
+     #                              n_iter=10, cv=5, verbose=2, random_state=42, n_jobs=1)
 
     # In[66]:
 
@@ -572,11 +572,11 @@ def trainmodel():
 
     # In[67]:
 
-   # rf_random.best_params_
+    #rf_random.best_params_
 
     # In[68]:
 
-   # prediction = rf_random.predict(X_test)
+    #prediction = rf_random.predict(X_test)
 
     # In[69]:
 
@@ -586,23 +586,23 @@ def trainmodel():
 
     # In[70]:
 
-   # plt.figure(figsize=(8, 8))
-    # plt.scatter(y_test, prediction, alpha=0.5)
-    # plt.xlabel("y_test")
-    # plt.ylabel("y_pred")
-    # plt.show()
+    #plt.figure(figsize=(8, 8))
+    #plt.scatter(y_test, prediction, alpha=0.5)
+    #plt.xlabel("y_test")
+    #plt.ylabel("y_pred")
+    #plt.show()
 
     # In[71]:
 
-    # print('MAE:', metrics.mean_absolute_error(y_test, prediction))
-    # print('MSE:', metrics.mean_squared_error(y_test, prediction))
-    # print('RMSE:', np.sqrt(metrics.mean_squared_error(y_test, prediction)))
+    #print('MAE:', metrics.mean_absolute_error(y_test, prediction))
+    #print('MSE:', metrics.mean_squared_error(y_test, prediction))
+    #print('RMSE:', np.sqrt(metrics.mean_squared_error(y_test, prediction)))
 
     # ---
-    # file = open('flight_rf.pkl', 'wb')
+    file = open('flight_rf3.pkl', 'wb')
 
-    # # dump information to that file
-    # pickle.dump(rf_random, file)
+    # dump information to that file
+    pickle.dump(reg_rf, file)
     # ## Save the model to reuse it again
 
     # In[77]:
@@ -613,7 +613,7 @@ def testmodel(airline,Source,Destination,Total_Stops,Depature_Date,Arrival_Date)
 
     # In[78]:
 
-    model = open('flight_rf.pkl', 'rb')
+    model = open('flight_rf3.pkl', 'rb')
     forest = pickle.load(model)
     Journey_day = int(pd.to_datetime(Depature_Date, format="%Y-%m-%dT%H:%M").day)
     Journey_month = int(pd.to_datetime(Depature_Date, format="%Y-%m-%dT%H:%M").month)
@@ -922,7 +922,7 @@ def testmodel(airline,Source,Destination,Total_Stops,Depature_Date,Arrival_Date)
             d_Kolkata,
             d_New_Delhi
         ]])
-    print (y_prediction)
+
     output=round(y_prediction[0],2)
     return output
 
@@ -952,9 +952,6 @@ Arrival_Date=col6.date_input('Select your Date of Arrival')
 col7,col8=st.columns(2)
 result =""
 if st.button("Predict"):
-   # model=trainmodel()
+    #model=trainmodel()
     result=testmodel(airline,Source,Destination,Total_Stops,Departure_Date,Arrival_Date)
     st.success('Suggested fare is: {}'.format(result))
-
-
-
